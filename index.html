@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/signin.css" rel="stylesheet">
+    <script src="./src/barcode.js"></script>
+    <script src="./annyang.min.js"></script>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" id="code" class="form-control" placeholder="Email address" required autofocus>
+        <div class="checkbox">
+        </div>
+        <input type="radio" name="type" value="upc_a">UPC A<br>
+  <input type="radio" name="type" value="upc_e">UPC E<br>
+  <input type="radio" name="type" value="code128">CODE 128
+        <button class="btn btn-lg btn-primary btn-block" onclick="document.getElementById('special').src=changeBarcode();">Sign in</button>
+        <br>
+        <img src="default.jpg" id="special" style="ddswidth:inherent;">
+      </form>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster    02835727-->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="./assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script>
+    function changeBarcode(){
+      var type = document.querySelector('input[name="type"]:checked').value;
+      var code = document.getElementById('code').value;
+      try {
+    return myFunction(type,code);
+}catch(err) {
+  return "wrong.jpg";
+    }
+  }
+  var commands = {
+    'show me bananas': function() {
+     document.getElementById('special').src = myFunction("upc_a", "000000085816");
+   },
+   'show me Marlboro Light': function() {
+    document.getElementById('special').src = myFunction("upc_e", "02838423");
+  },
+  'show me Marlboro Southern Cut': function() {
+   document.getElementById('special').src = myFunction("upc_e", "02842426");
+ },
+ 'show me sixteen ounce Coffee': function() {
+  document.getElementById('special').src = myFunction("upc_a", "000000086165");
+},
+
+
+
+  };
+
+  // Add our commands to annyang
+  annyang.addCommands(commands);
+
+  // Start listening. You can call this here, or attach this call to an event, button, etc.
+  annyang.start();
+
+
+    </script>
+  </body>
+</html>
